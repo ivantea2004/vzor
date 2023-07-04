@@ -1,1 +1,3 @@
 **/build
+conanfile.py
+CMakeUserPresets.json
