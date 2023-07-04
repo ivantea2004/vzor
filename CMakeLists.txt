@@ -36,6 +36,10 @@ set_target_properties(vzor PROPERTIES PUBLIC_HEADER "${VZOR_HEADERS}")
 
 set_target_properties(vzor PROPERTIES MSVC_RUNTIME_LIBRARY ${VZOR_MSVC_RUNTIME_LIBRARY})
 
+find_package(stb REQUIRED)
+
+target_link_libraries(vzor PRIVATE stb::stb)
+
 if(BUILD_EXAMPLES)
 
     add_subdirectory(examples)
