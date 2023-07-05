@@ -1,6 +1,7 @@
 #include<utility>
 #include<array>
 #include<cstring>
+#include<algorithm>
 #include<vzor/detail/allocator.hpp>
 
 namespace vzor::detail
