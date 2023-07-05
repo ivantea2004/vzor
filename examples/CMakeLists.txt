@@ -1,4 +1,11 @@
 
-add_subdirectory(example1)
+function(vzor_example name)
+    add_executable(${name} ${name}.cpp)
+    target_link_libraries(${name} PRIVATE vzor loader)
+    target_compile_features(${name} PRIVATE cxx_std_20)
+    set(VZOR_EXAMPLE_TARGETS ${VZOR_EXAMPLE_TARGETS} ${name} PARENT_SCOPE)
+endfunction()
 
-set(VZOR_EXAMPLE_TARGETS example1 PARENT_SCOPE)
+vzor_example(print_size)
+
+set(VZOR_EXAMPLE_TARGETS print_size PARENT_SCOPE)
