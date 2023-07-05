@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<fstream>
+#include<filesystem>
 #include<vzor/image.hpp>
 #include<vzor/decode_image.hpp>
 
@@ -25,13 +26,12 @@ std::vector<char> read_file(std::string filename)
 int main()
 {
 	
-	std::string path;
+	std::filesystem::path dir = __FILE__;
+	dir = dir.parent_path();
+		
+	std::filesystem::path path = dir / "red.png";
 
-	path = __FILE__ "/../";
-
-	path += "red.png";
-
-	auto data = read_file(path);
+	auto data = read_file(path.string());
 
 	vzor::image img = vzor::decode_image<vzor::rgba_t>(data.data(), data.size());
 	
