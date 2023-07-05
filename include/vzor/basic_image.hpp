@@ -1,5 +1,6 @@
 #pragma once
 #include<cstddef>
+#include<type_traits>
 #include<memory>
 
 namespace vzor
@@ -12,6 +13,8 @@ namespace vzor
 
 		using pixel_type = Pixel;
 		using allocator_type = Allocator;
+
+		static_assert(std::is_same_v<pixel_type, typename Allocator::value_type>, "Allocator must allocate pixels.");
 
 		basic_image(
 			pixel_type*data,

@@ -2,3 +2,4 @@
 conanfile.py
 CMakeUserPresets.json
 *.png
+!examples/example1/red.png

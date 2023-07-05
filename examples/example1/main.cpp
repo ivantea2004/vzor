@@ -5,11 +5,13 @@
 #include<vzor/image.hpp>
 #include<vzor/decode_image.hpp>
 
-using rgba_t = std::array<uint8_t, 4>;
-
 std::vector<char> read_file(std::string filename)
 {
 	std::ifstream file(filename, std::ios::binary | std::ios::ate);
+
+	if (!file)
+		return {};
+
 	std::streamsize size = file.tellg();
 	file.seekg(0, std::ios::beg);
 
@@ -25,11 +27,14 @@ int main()
 {
 	
 	std::string path;
-	std::cin >> path;
+
+	path = __FILE__ "/../";
+
+	path += "red.png";
 
 	auto data = read_file(path);
 
-	auto img = vzor::decode_image<rgba_t>(data.data(), data.size());
+	vzor::image img = vzor::decode_image<vzor::rgba_t>(data.data(), data.size());
 	
 	std::cout << std::format("Width: {}\nHeight: {}\n", img.width(), img.height());
 
