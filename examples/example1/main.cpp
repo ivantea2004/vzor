@@ -1,7 +1,6 @@
 #include<iostream>
 #include<vector>
 #include<fstream>
-#include<format>
 #include<vzor/image.hpp>
 #include<vzor/decode_image.hpp>
 
@@ -36,7 +35,7 @@ int main()
 
 	vzor::image img = vzor::decode_image<vzor::rgba_t>(data.data(), data.size());
 	
-	std::cout << std::format("Width: {}\nHeight: {}\n", img.width(), img.height());
+	std::cout << "Width: " << img.width() << "\nHeight: " << img.height() << "\n";
 
 	return 0;
 }
