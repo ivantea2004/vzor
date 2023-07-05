@@ -32,7 +32,7 @@ file(GLOB_RECURSE VZOR_SOURCES ${VZOR_ROOT}/src/*.cpp)
 add_library(vzor ${VZOR_HEADERS} ${VZOR_SOURCES})
 
 target_include_directories(vzor PUBLIC ${VZOR_ROOT}/include)
-set_target_properties(vzor PROPERTIES PUBLIC_HEADER "${VZOR_HEADERS}")
+target_sources(vzor INTERFACE FILE_SET vzor_public_headers TYPE HEADERS BASE_DIRS include FILES ${VZOR_HEADERS})
 set_target_properties(vzor PROPERTIES MSVC_RUNTIME_LIBRARY ${VZOR_MSVC_RUNTIME_LIBRARY})
 target_compile_features(vzor PUBLIC cxx_std_20)
 target_link_libraries(vzor PRIVATE stb::stb)
@@ -67,4 +67,4 @@ set_target_properties(${VZOR_TEST_TARGETS} PROPERTIES FOLDER "tests")
 
 
 
-install(TARGETS vzor)
+install(TARGETS vzor FILE_SET vzor_public_headers)
