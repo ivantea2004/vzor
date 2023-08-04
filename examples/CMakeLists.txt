@@ -1,11 +1,14 @@
 
-function(vzor_example name)
-    add_executable(${name} ${name}.cpp)
-    target_link_libraries(${name} PRIVATE vzor loader)
-    target_compile_features(${name} PRIVATE cxx_std_20)
-    set(VZOR_EXAMPLE_TARGETS ${VZOR_EXAMPLE_TARGETS} ${name} PARENT_SCOPE)
-endfunction()
+string(APPEND CMAKE_FOLDER "/examples")
 
-vzor_example(print_size)
+add_executable(vzor_print_size print_size.cpp)
 
-set(VZOR_EXAMPLE_TARGETS print_size PARENT_SCOPE)
+add_executable(vzor::print_size ALIAS vzor_print_size)
+
+set_target_properties(vzor_print_size
+    PROPERTIES
+        OUTPUT_NAME vzor-print-size
+        EXPORT_NAME print_size
+)
+
+target_link_libraries(vzor_print_size PRIVATE vzor::loader vzor::vzor)

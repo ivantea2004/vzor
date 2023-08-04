@@ -33,9 +33,7 @@ class Test1Recipe(ConanFile):
     def generate(self):
         
         tc = CMakeToolchain(self)
-        tc.variables['ENABLE_STATIC_RUNTIME'] = is_msvc_static_runtime(self)
-        tc.variables['BUILD_EXAMPLES'] = True
-        tc.variables['BUILD_SHARED_LIBS'] = False
+        tc.variables['BUILD_EXAMPLES'] = False
         tc.variables['BUILD_TESTING'] = not self.skip_test()
         tc.generate()
 

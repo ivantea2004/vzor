@@ -1,4 +1,16 @@
 
-add_library(loader loader.hpp loader.cpp)
-target_include_directories(loader PUBLIC ${VZOR_ROOT}/loader)
-target_compile_features(loader PUBLIC cxx_std_20)
+
+string(APPEND CMAKE_FOLDER "/common")
+
+add_library(vzor_loader loader.hpp loader.cpp)
+
+add_library(vzor::loader ALIAS vzor_loader)
+
+set_target_properties(vzor_loader
+    PROPERTIES
+        OUTPUT_NAME vzor-loader
+        EXPORT_NAME loader
+)
+
+target_include_directories(vzor_loader PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_compile_features(vzor_loader PUBLIC cxx_std_20)
