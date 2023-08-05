@@ -67,7 +67,7 @@ endif()
 
 if(BUILD_TESTING)
     enable_testing()
-    find_package(Gtest REQUIRED)
+    find_package(GTest REQUIRED)
     add_subdirectory(test)
 endif()
 
