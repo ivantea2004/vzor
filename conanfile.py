@@ -1,6 +1,5 @@
 from conan import ConanFile
 from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout, CMakeDeps
-from conan.tools.microsoft import is_msvc_static_runtime
 
 class Test1Recipe(ConanFile):
     name = "vzor"
@@ -20,8 +19,8 @@ class Test1Recipe(ConanFile):
 
     def requirements(self):
         self.requires('stb/cci.20220909')
-        #if self.should_test():
-        self.test_requires('gtest/1.13.0')
+        if self.should_test():
+            self.test_requires('gtest/1.13.0')
 
     def config_options(self):
         if self.settings.os == "Windows":
