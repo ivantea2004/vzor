@@ -12,9 +12,16 @@ class Test1Recipe(ConanFile):
 
     exports_sources = ['CMakeLists.txt', 'src/*', 'include/*', 'loader/*', 'examples/*', 'images/*', 'test/*']
 
+    def skip_test(self):
+        return self.conf.get("tools.build:skip_test", default=False)
+
+    def should_test(self):
+        return not self.options.shared and not self.skip_test()
+
     def requirements(self):
-       self.requires('stb/cci.20220909')
-       self.test_requires('gtest/1.13.0')
+        self.requires('stb/cci.20220909')
+        #if self.should_test():
+        self.test_requires('gtest/1.13.0')
 
     def config_options(self):
         if self.settings.os == "Windows":
@@ -27,14 +34,11 @@ class Test1Recipe(ConanFile):
     def layout(self):
         cmake_layout(self)
 
-    def skip_test(self):
-        return self.conf.get("tools.build:skip_test", default=False)
-
     def generate(self):
         
         tc = CMakeToolchain(self)
         tc.variables['BUILD_EXAMPLES'] = False
-        tc.variables['BUILD_TESTING'] = not self.skip_test()
+        tc.variables['BUILD_TESTING'] = self.should_test()
         tc.generate()
 
         deps = CMakeDeps(self)
@@ -44,7 +48,8 @@ class Test1Recipe(ConanFile):
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
-        cmake.test()
+        if self.should_test():
+            cmake.test()
 
     def package(self):
         cmake = CMake(self)

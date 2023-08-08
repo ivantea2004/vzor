@@ -19,11 +19,19 @@ if(BUILD_TESTING AND BUILD_SHARED_LIBS)
     set(BUILD_TESTING OFF)
 endif()
 
-# 
-
 set(CMAKE_FOLDER "vzor")
 
+set(CMAKE_C_VISIBILITY_PRESET hidden)
+set(CMAKE_CXX_VISIBILITY_PRESET hidden)
+set(CMAKE_VISIBILITY_INLINES_HIDDEN ON)
+
 add_library(vzor)
+
+set_target_properties(vzor
+    PROPERTIES
+        VERSION ${PROJECT_VERSION}
+        SOVERSION ${PROJECT_VERSION_MAJOR}
+)
 
 add_library(vzor::vzor ALIAS vzor)
 
@@ -33,11 +41,19 @@ set_target_properties(vzor
         EXPORT_NAME vzor
 )
 
+include(GenerateExportHeader)
+
+generate_export_header(
+    vzor
+    EXPORT_FILE_NAME vzor/export.hpp
+)
+
 target_sources(vzor
     PUBLIC
     FILE_SET HEADERS
-    BASE_DIRS include
+    BASE_DIRS include ${CMAKE_CURRENT_BINARY_DIR}
     FILES
+        include/vzor/config.hpp
         include/vzor/basic_image.hpp
         include/vzor/decode_image.hpp
         include/vzor/image.hpp
@@ -45,10 +61,10 @@ target_sources(vzor
         include/vzor/rgba.hpp
         include/vzor/detail/allocator.hpp
         include/vzor/detail/load_image_from_memory.hpp
+        ${CMAKE_CURRENT_BINARY_DIR}/vzor/export.hpp
     PRIVATE
         src/detail/allocator.cpp
         src/detail/load_image_from_memory.cpp
-        src/detail/stb_image_impl.cpp
 )
 
 target_compile_features(vzor PUBLIC cxx_std_20)
@@ -65,8 +81,9 @@ if(BUILD_EXAMPLES)
     add_subdirectory(examples)
 endif()
 
+include(CTest)
+
 if(BUILD_TESTING)
-    enable_testing()
     find_package(GTest REQUIRED)
     add_subdirectory(test)
 endif()

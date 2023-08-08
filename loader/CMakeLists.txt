@@ -2,7 +2,7 @@
 
 string(APPEND CMAKE_FOLDER "/common")
 
-add_library(vzor_loader loader.hpp loader.cpp)
+add_library(vzor_loader STATIC loader.hpp loader.cpp)
 
 add_library(vzor::loader ALIAS vzor_loader)
 

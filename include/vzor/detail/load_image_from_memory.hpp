@@ -1,11 +1,11 @@
 #pragma once
+#include<vzor/config.hpp>
 #include<vzor/pixel_traits.hpp>
 #include<vzor/detail/allocator.hpp>
 
 namespace vzor::detail
 {
-	
-	void* load_image_from_memory_impl(
+	VZOR_EXPORT void* load_image_from_memory_impl(
 		const void* data,
 		std::size_t size,
 		std::size_t desired_channels,
