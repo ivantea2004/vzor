@@ -1,7 +1,7 @@
 from conan import ConanFile
 from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout, CMakeDeps
 
-class Test1Recipe(ConanFile):
+class VzorRecipe(ConanFile):
     name = "vzor"
     version = "0.1.0"
 
