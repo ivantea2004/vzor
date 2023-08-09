@@ -10,11 +10,11 @@ option(BUILD_EXAMPLES "Build examples" OFF)
 option(BUILD_TESTING "Build testing" OFF)
 
 if(BUILD_TESTING AND BUILD_SHARED_LIBS)
-    # On Windows test executables can not find dllls    
+    # On Windows test executables can not find dllls
     message(WARNING
         " BUILD_TESTING and BUILD_SHARED_LIBS are both enabled.\n"
         " Testing is not possible with shared libraries.\n"
-        " Disabling BUID_TESING."
+        " Disabling BUILD_TESTING."
     )
     set(BUILD_TESTING OFF)
 endif()
@@ -36,7 +36,7 @@ set_target_properties(vzor
 add_library(vzor::vzor ALIAS vzor)
 
 set_target_properties(vzor
-    PROPERTIES 
+    PROPERTIES
         OUTPUT_NAME vzor
         EXPORT_NAME vzor
 )
@@ -92,9 +92,9 @@ include(GNUInstallDirs)
 
 install(
     TARGETS vzor
-    RUNTIME 
+    RUNTIME
         DESTINATION ${CMAKE_INSTALL_BINDIR}
-    LIBRARY 
+    LIBRARY
         DESTINATION ${CMAKE_INSTALL_LIBDIR}
     ARCHIVE
         DESTINATION ${CMAKE_INSTALL_LIBDIR}
