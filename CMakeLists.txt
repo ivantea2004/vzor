@@ -75,6 +75,7 @@ target_link_libraries(vzor PRIVATE stb::stb)
 
 if(BUILD_EXAMPLES OR BUILD_TESTING)
     add_subdirectory(loader)
+    set(images_directory ${CMAKE_CURRENT_SOURCE_DIR}/images)
 endif()
 
 if(BUILD_EXAMPLES)
@@ -99,5 +100,5 @@ install(
     ARCHIVE
         DESTINATION ${CMAKE_INSTALL_LIBDIR}
     FILE_SET HEADERS
-    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )

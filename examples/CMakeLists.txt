@@ -12,3 +12,5 @@ set_target_properties(vzor_print_size
 )
 
 target_link_libraries(vzor_print_size PRIVATE vzor::loader vzor::vzor)
+
+set_target_properties(vzor_print_size PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY ${images_directory})
