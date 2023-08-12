@@ -1,10 +1,10 @@
-#include<loader.hpp>
+#include<load_file.hpp>
 #include<fstream>
 
-namespace loader
+namespace vzor
 {
 
-	std::vector<char> load_file(std::filesystem::path filename)
+    std::vector<char> load_file(const std::string& filename)
 	{
 		std::ifstream file(filename, std::ios::binary | std::ios::ate);
 
@@ -22,4 +22,6 @@ namespace loader
 		return buffer;
 	}
 
+
 }
+

@@ -1,7 +1,7 @@
 #include<iostream>
 #include<vzor/image.hpp>
 #include<vzor/decode_image.hpp>
-#include<loader.hpp>
+#include<load_file.hpp>
 
 int main()
 {
@@ -9,7 +9,7 @@ int main()
 
 	std::cin >> path;
 
-	auto file = loader::load_file(path);
+	auto file = vzor::load_file(path);
 
 	vzor::image img = vzor::decode_image<vzor::rgba_t>(file.data(), file.size());
 	

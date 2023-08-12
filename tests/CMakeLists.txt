@@ -14,7 +14,7 @@ set_target_properties(vzor_test_decode
         EXPORT_NAME vzor::test_decode
 )
 
-target_link_libraries(vzor_test_decode PRIVATE vzor::vzor GTest::gtest GTest::gtest_main vzor::loader)
+target_link_libraries(vzor_test_decode PRIVATE vzor::vzor GTest::gtest GTest::gtest_main vzor::load_file)
 target_compile_features(vzor_test_decode PRIVATE cxx_std_20)
 
 get_property(is_multi_config GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)

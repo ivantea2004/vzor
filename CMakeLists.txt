@@ -74,8 +74,8 @@ find_package(stb REQUIRED)
 target_link_libraries(vzor PRIVATE stb::stb)
 
 if(BUILD_EXAMPLES OR BUILD_TESTING)
-    add_subdirectory(loader)
-    set(images_directory ${CMAKE_CURRENT_SOURCE_DIR}/images)
+    add_subdirectory(common/load_file)
+    set(images_directory ${CMAKE_CURRENT_SOURCE_DIR}/common/images)
 endif()
 
 if(BUILD_EXAMPLES)
@@ -86,7 +86,7 @@ include(CTest)
 
 if(BUILD_TESTING)
     find_package(GTest REQUIRED)
-    add_subdirectory(test)
+    add_subdirectory(tests)
 endif()
 
 include(GNUInstallDirs)
