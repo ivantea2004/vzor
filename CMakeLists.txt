@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.26)
 
 project(vzor
-    VERSION 0.1.0
+    VERSION 0.2.0
     LANGUAGES CXX
 )
 
@@ -54,17 +54,12 @@ target_sources(vzor
     BASE_DIRS include ${CMAKE_CURRENT_BINARY_DIR}
     FILES
         include/vzor/config.hpp
-        include/vzor/basic_image.hpp
         include/vzor/decode_image.hpp
-        include/vzor/image.hpp
-        include/vzor/pixel_traits.hpp
-        include/vzor/rgba.hpp
-        include/vzor/detail/allocator.hpp
-        include/vzor/detail/load_image_from_memory.hpp
+        include/vzor/detail/any_allocator.hpp
         ${CMAKE_CURRENT_BINARY_DIR}/vzor/export.hpp
     PRIVATE
-        src/detail/allocator.cpp
-        src/detail/load_image_from_memory.cpp
+        src/any_allocator.cpp
+        src/decode_image.cpp
 )
 
 target_compile_features(vzor PUBLIC cxx_std_20)

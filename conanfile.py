@@ -3,13 +3,13 @@ from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout, CMakeDeps
 
 class VzorRecipe(ConanFile):
     name = "vzor"
-    version = "0.1.0"
+    version = "0.2.0"
 
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
 
-    exports_sources = ['CMakeLists.txt', 'src/*', 'include/*', 'loader/*', 'examples/*', 'images/*', 'test/*']
+    exports_sources = ['CMakeLists.txt', 'src/*', 'include/*', 'common/*', 'examples/*', 'tests/*']
 
     def skip_test(self):
         return self.conf.get("tools.build:skip_test", default=False)

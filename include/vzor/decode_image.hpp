@@ -1,22 +1,46 @@
 #pragma once
-#include<vzor/basic_image.hpp>
-#include<vzor/detail/load_image_from_memory.hpp>
-#include<vzor/pixel_traits.hpp>
+#include<cstdint>
+#include<vzor/detail/any_allocator.hpp>
 
 namespace vzor
 {
+    
+    namespace detail
+    {
+        
+        VZOR_EXPORT
+        std::uint8_t* decode_image_impl(
+                const void*data,
+                std::size_t size,
+                std::size_t desired_components,
+                std::size_t& width,
+                std::size_t& height,
+                std::size_t& real_components,
+                any_allocator allocator
+            );
+    }
 
-	template<typename Pixel, typename Allocator = std::allocator<Pixel>>
-	basic_image<Pixel, Allocator> decode_image(const void* data, size_t size, Allocator alloc = Allocator{})
-	{
-
-		size_t width, height, channels;
-
-		using value_type = typename detail::pixel_traits<Pixel>::value_type;
-		const size_t desired_channels = detail::pixel_traits<Pixel>::size;
-
-		Pixel* pixel_data = detail::load_image_from_memory(data, size, desired_channels, width, height, channels, alloc);
-		return basic_image<Pixel, Allocator>(pixel_data, width, height, alloc);
-	}
+    template<typename Allocator = std::allocator<void>>
+    std::uint8_t* decode_image(
+            const void*data,
+            std::size_t size,
+            std::size_t desired_components,
+            std::size_t& width,
+            std::size_t& height,
+            std::size_t& real_components,
+            Allocator allocator = Allocator{}
+        )
+    {
+        typename std::allocator_traits<Allocator>::template rebind_alloc<std::max_align_t> alloc(allocator);
+        return detail::decode_image_impl(
+                data, 
+                size,
+                desired_components, 
+                width,
+                height,
+                real_components,
+                alloc
+            );
+    }
 
 }

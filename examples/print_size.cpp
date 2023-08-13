@@ -1,5 +1,4 @@
 #include<iostream>
-#include<vzor/image.hpp>
 #include<vzor/decode_image.hpp>
 #include<load_file.hpp>
 
@@ -11,9 +10,22 @@ int main()
 
 	auto file = vzor::load_file(path);
 
-	vzor::image img = vzor::decode_image<vzor::rgba_t>(file.data(), file.size());
-	
-	std::cout << "Width: " << img.width() << "\nHeight: " << img.height() << "\n";
+	size_t width, height, real_components;
+
+	std::uint8_t* image = vzor::decode_image(
+		file.data(),
+		file.size(),
+		4,
+		width,
+		height,
+		real_components
+	);
+
+	delete image;
+
+	std::cout << "Width: " << width<< "\nHeight: " << height << "\n";
+
+
 
 	return 0;
 }
