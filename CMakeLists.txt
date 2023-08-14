@@ -8,6 +8,7 @@ project(vzor
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(BUILD_EXAMPLES "Build examples" OFF)
 option(BUILD_TESTING "Build testing" OFF)
+option(BUILD_DOCS "Build documentaion" OFF)
 
 if(BUILD_TESTING AND BUILD_SHARED_LIBS)
     # On Windows test executables can not find dllls
@@ -97,3 +98,7 @@ install(
     FILE_SET HEADERS
         INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
+
+if(BUILD_DOCS)
+    add_subdirectory(docs)
+endif()
